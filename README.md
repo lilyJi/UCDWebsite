@@ -15,13 +15,9 @@ After download this project to your local machine, you need install it with comm
 
 # How to Test / Development
 
-*Build
-
 Build this project with command line
 
     $ node build.js
-
-*Server
 
 This website use Firebase to serve the task data, so you need to connect to firebase firstly.
 
