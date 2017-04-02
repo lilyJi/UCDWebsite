@@ -6,26 +6,24 @@ This project includes everything I've learned from user centered design and deve
 
 You can use this project as a book to learn user centered design and development course, it contains lots learning material and great tasks to make practice of what you have learned. Also it contains my work when I learned this course and you can treat them as an example.
 
-#Users
-
 
 # How to Install
 
-* After download this project to your local machine, you need install it with command line
+After download this project to your local machine, you need install it with command line
 
     $ npm install
 
 # How to Test / Development
 
-Build
+*Build
 
-* Build this project with command line
+Build this project with command line
 
     $ node build.js
 
-Server
+*Server
 
-* This website use Firebase to serve the task data, so you need to connect to firebase firstly.
+This website use Firebase to serve the task data, so you need to connect to firebase firstly.
 
     $ firebase server
 
@@ -41,4 +39,4 @@ After above steps, you can start to look at week 1 material and do task.
 
 # Need Help?
 
-    If you need more help, feel free to contact me at lili.ji@colorado.edu.
+If you need more help, feel free to contact me at lili.ji@colorado.edu.
