@@ -36,7 +36,7 @@ The server is default to `http://localhost:5000` Then you can visit project webi
 
     $ firebase deploy
 
-## Type of Contribution
+## Type of Contributions
 
 ### Implementation
 
@@ -50,7 +50,7 @@ This is a one semester course to learn how to design and develop a user friendly
 
 This original version and content of the guide is maintained in English. If you could help to translate learning material or this book to your native language, it will benefit a larger group. Translations to new languages are always welcome, especially if you can maintain the translation!
 
-## Vision
+## Version
 
 This is initial version for this project, and there is not a roadmap for now.
 
