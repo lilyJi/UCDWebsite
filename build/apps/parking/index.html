@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/tomorrow.min.css">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<link rel="stylesheet" type="text/css" href="SPpark.css">
+
+ </head>
+ 	<style>
+	  .container ul li {
+	  list-style-type: circle;
+	  padding-left: 10px;
+	  margin-left: 30px;
+	  }
+	  h2 {
+	  border-bottom: solid #ccc 1px;
+	  }
+	  h3 {
+	  font-style: italic;
+	  }
+	  code {
+	  border: 1px #ddd solid;
+	  }
+	  .btn {
+	  font-size: 50px;
+	  height: 75px;
+	  line-height: 75px;
+	  }
+	</style>
+  <body style="background-image:url(SFstreet.jpg)">
+
+  	<div class="navbar">
+  	  <nav>
+  		<div class="nav-wrapper blue-grey" id="SPpark-nav">
+  		  <!-- the href refreshes the page, but its all daynamic so it only for the user -->
+  		  <a href="index.html" class="brand-logo center">SANS-parking?</a>
+
+  		  <ul class="right hide-on-small-and-down">
+  		  	<li><a href="/">Home</a></li>
+  		  	<li><a href="garages.html">Garages</a></li>
+  		  	<li><a href="garages_map.html">Map</a></li>
+  		  </ul>
+  		</div>
+  	  </nav>
+  	</div>
+
+	<div class="container">
+	  <div class="row">
+	  	<div class="col s12">
+	  	  <div class="card">
+	  	  	<div class="card-image">
+	  	  	  <img src="gg_fog.jpg">
+	  	  	  <span class="card-title"><h2 style="color:black;">Find parking in San Francisco</h2></span>
+	  	  	</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <a class="waves-effect btn col s5 blue-grey" href="garages.html">Garage List</a>
+          <a class="waves-effect btn col s5 blue-grey right" href="garages_map.html">Garage Map</a>
+		</div>
+	  </div>
+	</div>
+
+  </body>
+</html>

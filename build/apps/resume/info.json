@@ -1,0 +1,22 @@
+{
+  "resume" : {
+    "Jobs" : [
+    	{"Company":"Lockheed Martin","Title":"Software Intern"},
+    	{"Company":"Qualcomm","Title":"Software Intern"},
+    	{"Company":"Cu Boulder","Title":"Teaching Assistant"}
+    	],
+    "Education" : [
+    	{"Name":"Monarch","Graduation":2016},
+    	{"Name":"CU Boulder","Graduation":2011}
+    	],
+    "Skills" : [
+    	{"Category":"Technologies","List":["Bootstrap","MongoDB","NodeJS","AngularJS","SQL"]},
+    	{"Category":"Languages","List":["C++","Scala","Javascript"]}
+    	],
+    "Projects" : [
+    	{"Name":"Disc Golf Scorecard","Platform":"Windows Phone","URL":"https://www.microsoft.com/en-us/store/apps/disc-golf-scorecard/9nblggh0jwkl"},
+    	{"Name":"MicroVeggies","Platform":"Web","URL":"www.MicroVeggies.com"},
+       	{"Name":"Mamabird","Platform":"Web","URL":"www.Mamabird.com"}
+    	]
+  }
+}

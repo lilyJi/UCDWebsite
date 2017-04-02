@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/tomorrow.min.css">
+  <style>
+  .container ul li {
+      list-style-type: circle;
+      padding-left: 10px;
+      margin-left: 30px;
+  }
+  h2 {
+    border-bottom: solid #ccc 1px;
+  }
+  h3 {
+    font-style: italic;
+  }
+  code {
+    border: 1px #ddd solid;
+  }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo right">UCCD II - 2016</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container flow-text">
+  <h1 id="data-models">Data Models</h1>
+<h2 id="users-database">Users Database</h2>
+<ul>
+<li>Users: {id:double, name:string, password:double}</li>
+</ul>
+<h2 id="comments-database">Comments Database</h2>
+<ul>
+<li>Comment: { id:double, inProcess:bool, ownerId:double, content:string }</li>
+</ul>
+<h2 id="movies-database">Movies Database</h2>
+<ul>
+<li>Movie: { id:double, title:string, year:double, commentNum:double}</li>
+</ul>
+<h2 id="revision">Revision</h2>
+<ul>
+<li>In oder to fit a smaller screen size, there had to be some significant revisions of the client page. Instead of show all the movie reviews, I changed it to show two newest reviews and added a button to show more history reviews. And below the movie picture, all users can see which user is typing.</li>
+</ul>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

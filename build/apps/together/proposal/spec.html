@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/tomorrow.min.css">
+  <style>
+  .container ul li {
+      list-style-type: circle;
+      padding-left: 10px;
+      margin-left: 30px;
+  }
+  h2 {
+    border-bottom: solid #ccc 1px;
+  }
+  h3 {
+    font-style: italic;
+  }
+  code {
+    border: 1px #ddd solid;
+  }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo right">UCCD II - 2016</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container flow-text">
+  <h1 id="specification">Specification</h1>
+<h1 id="data">Data</h1>
+<p>Our app uses the following structure for the database backend:</p>
+<ul>
+<li><p><code>users</code></p>
+<ul>
+<li>username<ul>
+<li>displayName</li>
+<li>id</li>
+<li>status</li>
+<li>projects: [projectName]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>projects</code></p>
+<ul>
+<li>projectName<ul>
+<li>taskIDs: [taskID]</li>
+<li>eventIDs: [eventID]</li>
+<li>members: [username]</li>
+<li>chatroom: chatroomID</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>tasks</code></p>
+<ul>
+<li>taskID<ul>
+<li>taskName</li>
+<li>taskDescription</li>
+<li>priority</li>
+<li>taskStatus</li>
+<li>assignedTo: [username]</li>
+<li>deadline</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>events</code></p>
+<ul>
+<li>eventID<ul>
+<li>eventName</li>
+<li>eventDate</li>
+<li>location</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>chatroom</code></p>
+<ul>
+<li>room-messages<ul>
+<li>roomID<ul>
+<li>messageID<ul>
+<li>message</li>
+<li>name</li>
+<li>timestamp</li>
+<li>type</li>
+<li>userId</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>room-metadata<ul>
+<li>roomID<ul>
+<li>createdAt</li>
+<li>createdByUserId</li>
+<li>id</li>
+<li>name</li>
+<li>type</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>users<ul>
+<li>userID</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="actions">Actions</h1>
+<p>The major actions of our app are:</p>
+<ul>
+<li>Task Operations</li>
+<li>Project Operations</li>
+<li>Event Operations</li>
+<li>Post in Chatroom</li>
+</ul>
+<h2 id="action-task-operations">Action: Task Operations</h2>
+<h3 id="case-add-a-task-t2-with-specified-fields">Case: Add a task ‘t2’ with specified fields</h3>
+<pre><code class="lang-javascript">// given
+tasks is
+{
+  &#39;-taskid1&#39;: {
+    &#39;taskName&#39; : &#39;t1&#39;,
+    &#39;taskDescription&#39; : &#39;Create firebase database&#39;,
+    &#39;priority&#39; : &#39;high&#39;,
+    &#39;taskStatus&#39; : &#39;doing&#39;,
+    &#39;assignedTo&#39; :  &#39;peichetsao&#39;,
+    &#39;deadline&#39; : &#39;05/03/2016&#39;
+  }
+}
+
+// when
+add_a_task(taskName = &#39;t2&#39;, taskDescription = &#39;Submit a demo&#39;, priority = &#39;low&#39;, taskStatus = &#39;done&#39;, assignedTo = &#39;lilyJi&#39;, deadline = &#39;01/03/2016&#39;)
+
+// then
+tasks should be
+{
+ &#39;-taskid1&#39;: {
+    &#39;taskName&#39; : &#39;t1&#39;,
+    &#39;taskDescription&#39; : &#39;Create firebase database&#39;,
+    &#39;priority&#39; : &#39;high&#39;,
+    &#39;taskStatus&#39; : &#39;doing&#39;,
+    &#39;assignedTo&#39; :  &#39;peichetsao&#39;,
+    &#39;deadline&#39; : &#39;05/03/2016&#39;
+  },
+  &#39;-taskid2&#39;: {
+    &#39;taskName&#39; : &#39;t2&#39;,
+    &#39;taskDescription&#39; : &#39;Submit a demo&#39;,
+    &#39;priority&#39; : &#39;low&#39;,
+    &#39;taskStatus&#39; : &#39;done&#39;,
+    &#39;assignedTo&#39; :  &#39;lilyJi&#39;,
+    &#39;deadline&#39; : &#39;01/03/2016&#39;
+  }
+}
+</code></pre>
+<h3 id="case-delete-a-task-t2-">Case: Delete a task ‘t2’</h3>
+<pre><code class="lang-javascript">// given
+tasks is
+{
+  &#39;-taskid1&#39;: {
+    &#39;taskName&#39; : &#39;task1&#39;,
+    &#39;taskDescription&#39; : &#39;Create firebase database&#39;,
+    &#39;priority&#39; : &#39;high&#39;,
+    &#39;taskStatus&#39; : &#39;doing&#39;,
+    &#39;assignedTo&#39; :  &#39;peichetsao&#39;,
+    &#39;deadline&#39; : &#39;05/03/2016&#39;
+  },
+ &#39;-taskid2&#39;: {
+    &#39;taskName&#39; : &#39;t2&#39;,
+    &#39;taskDescription&#39; : &#39;Submit a demo&#39;,
+    &#39;priority&#39; : &#39;low&#39;,
+    &#39;taskStatus&#39; : &#39;done&#39;,
+    &#39;assignedTo&#39; :  &#39;lilyJi&#39;,
+    &#39;deadline&#39; : &#39;05/03/2016&#39;
+  }
+}
+
+// when
+delete_a_task(taskName = &#39;t2&#39;)
+
+// then
+tasks should be
+{
+ &#39;-taskid1&#39;: {
+    &#39;taskName&#39; : &#39;task1&#39;,
+    &#39;taskDescription&#39; : &#39;Create firebase database&#39;,
+    &#39;priority&#39; : &#39;high&#39;,
+    &#39;taskStatus&#39; : &#39;doing&#39;,
+    &#39;assignedTo&#39; :  &#39;peichetsao&#39;,
+    &#39;deadline&#39; : &#39;05/03/2016
+  }
+}
+</code></pre>
+<h3 id="case-edit-a-task-t2-to-re-assign-member-to-kavyaravikumar-and-change-the-deadline-to-03-01-2016-">Case: Edit a task ‘t2’ to re-assign member to ‘kavyaravikumar’ and change the deadline to ‘03/01/2016’</h3>
+<pre><code class="lang-javascript">// given
+tasks is
+{
+  &#39;-taskid1&#39;: {
+    &#39;taskName&#39; : &#39;task1&#39;,
+    &#39;taskDescription&#39; : &#39;Create firebase database&#39;,
+    &#39;priority&#39; : &#39;high&#39;,
+    &#39;taskStatus&#39; : &#39;doing&#39;,
+    &#39;assignedTo&#39; :  &#39;peichetsao&#39;,
+    &#39;deadline&#39; : &#39;05/03/2016&#39;
+  },
+ &#39;-taskid2&#39;: {
+    &#39;taskName&#39; : &#39;t2&#39;,
+    &#39;taskDescription&#39; : &#39;Submit a demo&#39;,
+    &#39;priority&#39; : &#39;low&#39;,
+    &#39;taskStatus&#39; : &#39;done&#39;,
+    &#39;assignedTo&#39; :  &#39;lilyJi&#39;,
+    &#39;deadline&#39; : &#39;01/03/2016&#39;
+  }
+}
+
+// when
+edit_task(taskName = &#39;t2&#39;, assignedTo = &#39;kavyaravikumar&#39;, deadline = &#39;03/01/2016&#39;)
+
+// then
+tasks should be
+{
+ &#39;-taskid1&#39;: {
+    &#39;taskName&#39; : &#39;task1&#39;,
+    &#39;taskDescription&#39; : &#39;Create firebase database&#39;,
+    &#39;priority&#39; : &#39;high&#39;,
+    &#39;taskStatus&#39; : &#39;doing&#39;,
+    &#39;assignedTo&#39; :  &#39;peichetsao&#39;,
+    &#39;deadline&#39; : &#39;05/03/2016&#39;
+  },
+ &#39;-taskid2&#39;: {
+    &#39;taskName&#39; : &#39;t2&#39;,
+    &#39;taskDescription&#39; : &#39;Submit a demo&#39;,
+    &#39;priority&#39; : &#39;low&#39;,
+    &#39;taskStatus&#39; : &#39;done&#39;,
+    &#39;assignedTo&#39; :  &#39;kavyaravikumar&#39;,
+    &#39;deadline&#39; : &#39;03/01/2016&#39;
+  }
+}
+</code></pre>
+<h2 id="action-project-operations">Action: Project Operations</h2>
+<h3 id="case-add-a-project-project1-with-administrator-peichetsao-and-members-calebhsu-kavyaravikumar-lilyji-">Case: Add a project ‘project1’ with administrator ‘peichetsao’ and members [‘calebhsu’, ‘kavyaravikumar’, ‘lilyJi’]</h3>
+<pre><code class="lang-javascript">// given
+projects is
+{
+  &#39;project0&#39;: {members: [&#39;peichetsao&#39;], &#39;chatroom&#39;: h245hsdg},
+}
+
+// when
+add_a_project(projectName = &#39;project1&#39;, members=[&#39;peichetsao&#39;,&#39;calebhsu&#39;, &#39;kavyaravikumar&#39;, &#39;lilyJi&#39;])
+
+// then
+projects should be
+{
+   &#39;project0&#39;: {members: [&#39;peichetsao&#39;], &#39;chatroom&#39;: h245hsdg},
+   &#39;project1&#39;: {&#39;members&#39;: [&#39;peichetsao&#39;,&#39;calebhsu&#39;, &#39;kavyaravikumar&#39;, &#39;lilyJi&#39;], &#39;chatroom&#39;: ge123ffa3}
+}
+</code></pre>
+<h3 id="case-edit-a-project-project1-with-administration-access-to-delete-a-member-calebhsu-from-the-project">Case: Edit a project ‘project1’ with administration access to delete a member ‘calebhsu’ from the project</h3>
+<pre><code class="lang-javascript">// given
+projects is
+{
+   &#39;project0&#39;: {members: [&#39;peichetsao&#39;], &#39;chatroom&#39;: h245hsdg},
+   &#39;project1&#39;: {&#39;members&#39;: [&#39;peichetsao&#39;,&#39;calebhsu&#39;, &#39;kavyaravikumar&#39;, &#39;lilyJi&#39;], &#39;chatroom&#39;: ge123ffa3}
+}
+
+// when
+edit_a_project(projectName = &#39;project1&#39;, members=[&#39;peichetsao&#39;, &#39;kavyaravikumar&#39;, &#39;lilyJi&#39;])
+
+// then
+projects should be
+{
+   &#39;project0&#39;: {members: [&#39;peichetsao&#39;], &#39;chatroom&#39;: h245hsdg},
+   &#39;project1&#39;: {&#39;members&#39;: [&#39;peichetsao&#39;, &#39;kavyaravikumar&#39;, &#39;lilyJi&#39;], &#39;chatroom&#39;: ge123ffa3}
+}
+</code></pre>
+<h3 id="case-delete-a-project-project1-with-administration-access">Case: Delete a project ‘project1’ with administration access</h3>
+<pre><code class="lang-javascript">// given
+projects is
+{
+   &#39;project0&#39;: {members: [&#39;peichetsao&#39;], &#39;chatroom&#39;: h245hsdg},
+   &#39;project1&#39;: {&#39;members&#39;: [&#39;peichetsao&#39;,&#39;calebhsu&#39;, &#39;kavyaravikumar&#39;, &#39;lilyJi&#39;], &#39;chatroom&#39;: ge123ffa3}
+}
+
+
+// when
+delete_a_project(projectName = &#39;project1&#39;)
+
+// then
+projects should be
+{
+   &#39;project0&#39;: {members: [&#39;peichetsao&#39;], &#39;chatroom&#39;: h245hsdg}
+}
+</code></pre>
+<h2 id="action-event-operations">Action: Event Operations</h2>
+<h3 id="case-add-an-event-meet-for-the-date-b-at-the-location-itll-at-18-00-">Case: Add an event ‘Meet’ for the date ‘b’ at the location ‘ITLL’ at  ‘18:00’</h3>
+<pre><code class="lang-javascript">// given
+events is
+{
+  &#39;-eventID1&#39;: {
+    &#39;eventName&#39;: &#39;Project Meeting&#39;
+    &#39;eventDate&#39;: &#39;a&#39;,
+    &#39;eventTime&#39;: &#39;15:00&#39;,
+    &#39;eventLocation&#39;: &#39;locA&#39;
+  }
+}
+
+// when
+addEvent(name = &#39;Meet&#39;, date = &#39;b&#39;, time=&#39;18:00&#39;, location=&#39;ITLL&#39;)
+
+// then
+events is
+{
+  &#39;-eventID1&#39;: {
+    &#39;eventName&#39;: &#39;Project Meeting&#39;
+    &#39;eventDate&#39;: &#39;a&#39;
+    &#39;eventTime&#39;: &#39;15:00&#39;
+    &#39;eventLocation&#39;: &#39;locA&#39;
+  }
+  &#39;-eventID2&#39;: {
+    &#39;eventName&#39;: &#39;Meet&#39;
+    &#39;eventDate&#39;: &#39;b&#39;
+    &#39;eventTime&#39;: &#39;18:00&#39;
+    &#39;eventLocation&#39;: &#39;ITLL&#39;
+  }
+}
+</code></pre>
+<h3 id="case-edit-an-event-dinner-out-to-a-new-date-04-10-2016-at-a-new-location-the-taj-">Case: Edit an event ‘Dinner Out’ to a new date ‘04/10/2016’ at a new location ‘The Taj’</h3>
+<pre><code class="lang-javascript">// given
+events is
+{
+  &#39;-eventID1&#39;: {
+    &#39;eventName&#39;: &#39;Project Meeting&#39;
+    &#39;eventDate&#39;: &#39;03/15/2016&#39;,
+    &#39;eventTime&#39;: &#39;15:00&#39;,
+    &#39;eventLocation&#39;: &#39;Location1&#39;
+  }
+&#39;-eventID2&#39;: {
+    &#39;eventName&#39;: &#39;Dinner Out&#39;
+    &#39;eventDate&#39;: &#39;04/15/2016&#39;
+    &#39;eventTime&#39;: &#39;18:00&#39;
+    &#39;eventLocation&#39;: &#39;Curry and Kebob&#39;
+  }
+}
+
+// when
+editEvent(name = &#39;Dinner out&#39;, date=&#39;04/10/2016&#39;, location=&#39;The Taj&#39;)
+
+// then
+events is
+{
+  &#39;-eventID1&#39;: {
+    &#39;eventName&#39;: &#39;Project Meeting&#39;
+    &#39;eventDate&#39;: &#39;03/15/2016&#39;
+    &#39;eventTime&#39;: &#39;15:00&#39;
+    &#39;eventLocation&#39;: &#39;Location1&#39;
+  }
+  &#39;-eventID2&#39;: {
+    &#39;eventName&#39;: &#39;Dinner Out&#39;
+    &#39;eventDate&#39;: &#39;04/10/2016&#39;
+    &#39;eventTime&#39;: &#39;18:00&#39;
+    &#39;eventLocation&#39;: &#39;The Taj&#39;
+  }
+}
+</code></pre>
+<h3 id="case-delete-an-existing-event-progress-check-meeting-">Case: Delete an existing event ‘Progress check meeting’</h3>
+<pre><code class="lang-javascript">// given
+events is
+{
+  &#39;-eventID1&#39;: {
+    &#39;eventName&#39;: &#39;Venue booking meeting&#39;
+    &#39;eventDate&#39;: &#39;03/15/2016&#39;
+    &#39;eventTime&#39;: &#39;15:00&#39;
+    &#39;eventLocation&#39;: &#39;Location1&#39;
+  }
+  &#39;-eventID2&#39;: {
+    &#39;eventName&#39;: &#39;Progress check meeting&#39;
+    &#39;eventDate&#39;: &#39;04/15/2016&#39;
+    &#39;eventTime&#39;: &#39;18:00&#39;
+    &#39;eventLocation&#39;: &#39;Location2&#39;
+  }
+}
+
+// when
+delete(name = &#39;Progress check meeting&#39;)
+
+// then
+events is
+{
+  &#39;-eventID1&#39;: {
+    &#39;eventName&#39;: &#39;Venue booking meeting&#39;
+    &#39;eventDate&#39;: &#39;03/15/2016&#39;,
+    &#39;eventTime&#39;: &#39;15:00&#39;,
+    &#39;eventLocation&#39;: &#39;Location1&#39;
+  }
+}
+</code></pre>
+<h2 id="action-post-in-chatroom">Action: Post in Chatroom</h2>
+<h3 id="case-user-d-posts-a-message-d-">Case: User D posts a message ‘d’</h3>
+<pre><code class="lang-javascript">// given
+chatroom.chatroomID is
+{
+  &#39;-msgid1&#39;: {
+    &#39;username&#39; : &#39;nameA&#39; 
+    &#39;messageContent&#39; : &#39;a&#39;
+  }
+  &#39;-msgid2&#39;: {
+    &#39;username&#39; : &#39;nameB&#39; 
+    &#39;messageContent&#39; : &#39;b&#39;
+  }
+  &#39;-msgid3&#39;: {
+    &#39;username&#39; : &#39;nameC&#39; 
+    &#39;messageContent&#39; : &#39;c&#39;
+  }
+}
+
+// when
+post_a_message(content = &#39;d&#39;)
+
+// then
+chatroom.chatroomID should be
+{
+  &#39;-msgid1&#39;: {
+    &#39;username&#39; : &#39;nameA&#39; 
+    &#39;messageContent&#39; : &#39;a&#39;
+  }
+  &#39;-msgid2&#39;: {
+    &#39;username&#39; : &#39;nameB&#39; 
+    &#39;messageContent&#39; : &#39;b&#39;
+  }
+  &#39;-msgid3&#39;: {
+    &#39;username&#39; : &#39;nameC&#39; 
+    &#39;messageContent&#39; : &#39;c&#39;
+  }
+   &#39;-msgid4&#39;: {
+    &#39;username&#39; : &#39;nameD&#39; 
+    &#39;messageContent&#39; : &#39;d&#39;
+  }
+}
+</code></pre>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
