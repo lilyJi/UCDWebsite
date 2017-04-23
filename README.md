@@ -1,6 +1,6 @@
 
 #Travis CI Status
-https://travis-ci.org/lilyJi/UCDWebsite.svg?branch=master
+![image](https://travis-ci.org/lilyJi/UCDWebsite.svg?branch=master)
 
 # UCDWebsite
 
