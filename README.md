@@ -1,3 +1,7 @@
+
+#Travis CI Status
+https://travis-ci.org/lilyJi/UCDWebsite.svg?branch=master
+
 # UCDWebsite
 
 This project includes everything I've learned from user centered design and development with Tom in Spring 16. I have develped several different website applications. You will use the CSS, Componets, and JavaScript knowlege and make use of Firebase database.
