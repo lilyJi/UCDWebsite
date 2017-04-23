@@ -1,28 +1,62 @@
 {
-  "name": "book",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "generator-travis",
+  "version": "0.0.0-development",
+  "description": "Yeoman generator to get and keep `.travis.yml` up-to-date effortlessly",
+  "license": "MIT",
+  "main": "generators/app/index.js",
+  "repository": "iamstarkov/generator-travis",
+  "author": {
+    "name": "Vladimir Starkov",
+    "email": "iamstarkov@gmail.com",
+    "url": "https://iamstarkov.com"
   },
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "commit": "git-cz",
+    "commitmsg": "validate-commit-msg",
+    "test": "mocha",
+    "tdd": "npm test -- --watch",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "boilerplate",
+    "node",
+    "starter",
+    "kit",
+    "yeoman",
+    "plugin",
+    "boilerplate",
+    "template",
+    "scaffold",
+    "module",
+    "node_module",
+    "node-module",
+    "travis",
+    "javascript",
+    "npm"
+  ],
+  "czConfig": {
+    "path": "cz-conventional-changelog"
+  },
   "dependencies": {
-    "consolidate": "^0.13.1",
-    "debug": "^2.2.0",
-    "handlebars": "^4.0.3",
-    "lodash": "^3.10.1",
-    "markdown-it": "^5.1.0",
-    "markdown-it-checkbox": "^1.1.0",
-    "metalsmith": "^2.1.0",
-    "metalsmith-branch": "0.0.4",
-    "metalsmith-in-place": "^1.3.2",
-    "metalsmith-layouts": "^1.4.2",
-    "metalsmith-markdown": "^0.2.1",
-    "metalsmith-rename": "^1.0.0",
-    "metalsmith-serve": "0.0.4",
-    "metalsmith-watch": "^1.0.1",
-    "nunjucks": "^2.3.0"
+    "merge-and-concat": "^1.0.2",
+    "ramda": "^0.23.0",
+    "sort-object": "^3.0.2",
+    "travis-config-keys": "^1.0.3",
+    "yamljs": "^0.2.10",
+    "yeoman-generator": "^1.1.1"
+  },
+  "devDependencies": {
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
+    "husky": "^0.13.3",
+    "mocha": "^3.2.0",
+    "semantic-release": "^6.3.2",
+    "validate-commit-msg": "^2.12.1",
+    "yeoman-assert": "^3.0.0",
+    "yeoman-test": "^1.6.0"
   }
 }
